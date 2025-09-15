@@ -1,76 +1,59 @@
 //
 //  AppDelegate.swift
-//  RemotePushBasics
+//  SlientPushDemo
 //
-//  Created by 김건우 on 9/13/25.
+//  Created by 김건우 on 9/15/25.
 //
 
 import UIKit
-import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    private let center = UNUserNotificationCenter.current()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        setNotificationCategories()
+        
         registerForRemoteNotifications()
-
+        
         return true
     }
 
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
     }
+
 }
 
 extension AppDelegate {
-
+    
+    private func requestUserNotificationAuthorization() async throws {
+        try await center.requestAuthorization(options: [.alert, .badge, .sound])
+    }
+    
     private func registerForRemoteNotifications() {
-        UNUserNotificationCenter.current().delegate = self
-
-        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: options) { granted, error in
-            print("푸시 알림 권한이 승인됨: \(granted)")
-            guard granted else { return }
-            DispatchQueue.main.async {
+        Task {
+            do {
+                try await requestUserNotificationAuthorization()
+                let settings = await center.notificationSettings()
+                print("푸시 알림 권한 승인됨:", settings.authorizationStatus == .authorized)
+                guard settings.authorizationStatus == .authorized else { return }
                 UIApplication.shared.registerForRemoteNotifications()
+            } catch {
+                // Handle error here..
             }
         }
     }
-    
-    private func setNotificationCategories() {
-        let accept = UNNotificationAction(
-            identifier: "ACCEPT_ACTION",
-            title: "Accept",
-            options: []
-        )
-        let decline = UNNotificationAction(
-            identifier: "DECLINE_ACTION",
-            title: "Decline",
-            options: []
-        )
-        let category = UNNotificationCategory(
-            identifier: "GAME_INVITATION",
-            actions: [accept, decline],
-            intentIdentifiers: [],
-            hiddenPreviewsBodyPlaceholder: "",
-            options: .customDismissAction
-        )
-        
-        UNUserNotificationCenter.current().setNotificationCategories([category])
-    }
 }
 
 extension AppDelegate {
-
+    
     func application(
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
@@ -83,29 +66,31 @@ extension AppDelegate {
         // 2. 개인 서버(provider server)로 토큰 전송
         print("Device Token: \(token)")
     }
-
+    
     func application(
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: any Error
     ) {
-        // 토큰 발급 실패 시, 일정 시간이 지난 후 재시도
+        // 일정 시간 후, 다시 디바이스 토큰 요청
     }
-}
-
-extension AppDelegate {
     
-    func application(
+    nonisolated func application(
         _ application: UIApplication,
-        didReceiveRemoteNotification userInfo: [AnyHashable : Any],
-        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
-    ) {
-        let gameID = userInfo["gameID"] as! String
+        didReceiveRemoteNotification userInfo: [AnyHashable : Any]
+    ) async -> UIBackgroundFetchResult {
+        let gameName = userInfo["gameName"] as? String
         
-        // ...
+        await MainActor.run {
+            if let gameName {
+                NotificationCenter.default.post(
+                    name: .newGameArrived,
+                    object: nil,
+                    userInfo: ["gameName": gameName]
+                )
+            }
+        }
         
-        completionHandler(.newData)
+        return .newData
     }
 }
 
-extension AppDelegate: UNUserNotificationCenterDelegate {
-}
