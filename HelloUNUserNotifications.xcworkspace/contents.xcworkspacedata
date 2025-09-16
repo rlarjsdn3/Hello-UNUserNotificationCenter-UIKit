@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:NotificationContentExtensionExample/NotificationContentExtensionExample.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:SlientPushDemo/SlientPushDemo.xcodeproj">
    </FileRef>
    <FileRef

@@ -1,0 +1,12 @@
+{
+    "aps" : {
+        "mutable-content": 1,
+        "alert" : {
+            "title" : "Video Placeholders",
+            "subtitle" : "GTV Videos Bucket",
+            "body" : "Play ForBiggerJoyrides now"
+        },
+        "category" : "PLACEHOLDER_VIDEO"
+    },
+    "video-url" : "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+}

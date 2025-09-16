@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24127" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Notification View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" userLabel="Notification View Controller" customClass="NotificationViewController" customModule="NotificationImageContentExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="01b-Qd-IM5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bus-oW-oKE">
+                                        <rect key="frame" x="0.0" y="0.0" width="106.66666666666667" height="110"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="bus-oW-oKE" secondAttribute="height" id="w4N-nw-Hl8"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vmk-7E-49j">
+                                        <rect key="frame" x="106.66666666666666" y="0.0" width="106.66666666666666" height="110"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Vmk-7E-49j" secondAttribute="height" id="iK4-Hg-JJd"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AO1-wj-DF7">
+                                        <rect key="frame" x="213.33333333333334" y="0.0" width="106.66666666666666" height="110"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="AO1-wj-DF7" secondAttribute="height" multiplier="1:1" id="e4r-gq-126"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="bus-oW-oKE" firstAttribute="width" secondItem="01b-Qd-IM5" secondAttribute="width" multiplier="0.333333" id="Aqa-4c-6h6"/>
+                                    <constraint firstItem="AO1-wj-DF7" firstAttribute="width" secondItem="01b-Qd-IM5" secondAttribute="width" multiplier="0.333333" id="i2M-Es-JQI"/>
+                                    <constraint firstItem="Vmk-7E-49j" firstAttribute="width" secondItem="01b-Qd-IM5" secondAttribute="width" multiplier="0.333333" id="vDz-cr-CgT"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2BE-c3-nQJ"/>
+                        <color key="backgroundColor" red="0.45882353186607361" green="0.74901962280273438" blue="0.66666668653488159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="01b-Qd-IM5" firstAttribute="leading" secondItem="2BE-c3-nQJ" secondAttribute="leading" id="CP4-ZB-eNR"/>
+                            <constraint firstItem="01b-Qd-IM5" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="top" id="acl-2V-A65"/>
+                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="bottom" secondItem="01b-Qd-IM5" secondAttribute="bottom" id="hOO-Sn-iWh"/>
+                            <constraint firstAttribute="trailing" secondItem="01b-Qd-IM5" secondAttribute="trailing" id="oo4-92-cqV"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="144"/>
+                    <connections>
+                        <outletCollection property="imageViews" destination="bus-oW-oKE" collectionClass="NSMutableArray" id="chI-PS-olL"/>
+                        <outletCollection property="imageViews" destination="Vmk-7E-49j" collectionClass="NSMutableArray" id="Hsi-Wa-SDb"/>
+                        <outletCollection property="imageViews" destination="AO1-wj-DF7" collectionClass="NSMutableArray" id="rSY-eo-tYe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138.93129770992365" y="188.02816901408451"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,17 @@
+{
+    "aps" : {
+        "mutable-content": 1,
+        "alert" : {
+            "title" : "Lorem Picsum",
+            "body" : "A simple, fast and free image placeholder service."
+        },
+        "category" : "PLACEHOLDER_IMAGES"
+    },
+    "image-urls" : [
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300",
+        "https://picsum.photos/200/300"
+    ]
+}
+
+
